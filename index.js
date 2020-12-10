@@ -16,15 +16,16 @@ async function example() {
     options.setProfile('C:/Users/wahyu/AppData/Roaming/Mozilla/Firefox/Profiles/gsiq15dk.default-release')
     let driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
 
-    let hour = 6;
-    let minutes = 31;
+    let hour = 18;
+    let minutes = 0;
 
     try {
-        await driver.get('https://shopee.co.id/Ponds-Age-Miracle-Facial-Foam-Sabun-Muka-Pembersih-Wajah-Youthful-Glow-100G-i.14318452.6417907186');
+        await driver.get('https://shopee.co.id/FlashDisk-Lexar-V40-Jumpdrive-16GB-Flash-Disk-16-GB-USB-2.0-i.15607053.3805488888');
 
         while (true) {
             if (new Date().getHours() == hour && new Date().getMinutes() >= minutes) {
-                //await driver.sleep(3000)
+                await driver.sleep(1000)
+                await driver.wait(until.elementLocated(By.xpath("(//button[@type='button'])[3]")));
                 await driver.findElement(By.xpath("(//button[@type='button'])[3]")).click();
                 await driver.sleep(3000)
                 await driver.wait(until.elementLocated(By.xpath("//div[5]/button")));
