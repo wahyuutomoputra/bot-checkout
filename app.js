@@ -17,27 +17,29 @@ async function example() {
     let driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
 
     let hour = 18;
-    let minutes = 30;
+    let minutes = 44;
+
+    await driver.get('https://shopee.co.id/Torenda-Soulmate-Confession-Pendant-Baby-Pink-Kalung-Wanita-i.94326370.4708168474');
+
+    const check = async() => {
+        while (true) {
+            if (new Date().getHours() == hour && new Date().getMinutes() >= minutes) {
+                await driver.sleep(500)
+                await driver.wait(until.elementLocated(By.xpath("(//button[@type='button'])[3]")));
+                await driver.findElement(By.xpath("(//button[@type='button'])[3]")).click();
+                await driver.sleep(3000)
+                await driver.wait(until.elementLocated(By.xpath("//div[5]/button")));
+                await driver.findElement(By.xpath("//div[5]/button")).click();
+                break;
+            }
+            await driver.sleep(1000)
+            console.log(colors.green('receiving data from https://shopee.co.id/'))
+        }
+
+    }
 
     try {
-        await driver.get('https://shopee.co.id/-Bayar-Di-Tempat-Mixdair-Serum-Wajah-Whitening-Hyaluronic-Acid-Essence-Skincare-Scar-Remove-Anti-Aging-i.112386075.1822163510');
 
-        const check = async () => {
-            while (true) {
-                if (new Date().getHours() == hour && new Date().getMinutes() >= minutes) {
-                    await driver.sleep(500)
-                    await driver.wait(until.elementLocated(By.xpath("(//button[@type='button'])[3]")));
-                    await driver.findElement(By.xpath("(//button[@type='button'])[3]")).click();
-                    await driver.sleep(3000)
-                    await driver.wait(until.elementLocated(By.xpath("//div[5]/button")));
-                    await driver.findElement(By.xpath("//div[5]/button")).click();
-                    break;
-                }
-                await driver.sleep(1000)
-                console.log(colors.green('receiving data from https://shopee.co.id/'))
-            }
-
-        }
 
         check()
     } catch (er) {
